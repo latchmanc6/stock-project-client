@@ -11,6 +11,7 @@ import WatchlistButton from "components/Watchlist/WatchlistButton";
 import { Button } from "components/Styled/style.js";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin: 80px 0 50px 0;
@@ -41,6 +42,7 @@ function Trade() {
   const [availableQuantity, setAvailableQuantity] = useState(0);
   const [orderStatus, setOrderStatus] = useState(false);
   const [totalCost, setTotalCost] = useState("");
+  let navigate = useNavigate();
 
   const getTickerDataFromAPI = async () => {
     await axios
@@ -139,6 +141,9 @@ function Trade() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    }
     getTickerDataFromAPI();
     getStockNews();
     // getAllTickers();
