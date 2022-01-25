@@ -23,7 +23,7 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
-    axios.post("http://wetrade-stock-project.herokuapp.com/auth", data).then((data) => {
+    axios.post("https://wetrade-stock-project.herokuapp.com/auth", data).then((data) => {
       console.log(data);
       navigate("/login");
     });

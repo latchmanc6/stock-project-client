@@ -24,12 +24,12 @@ function Trade() {
   const getTickerDataFromAPI = async () => {
     await axios
       .get(
-        `http://wetrade-stock-project.herokuapp.com/api/stock/getStockInfoUpdate/${ticker}`
+        `https://wetrade-stock-project.herokuapp.com/api/stock/getStockInfoUpdate/${ticker}`
       )
       .then(() => {
         axios
           .get(
-            `http://wetrade-stock-project.herokuapp.com/api/stock/getStockInfo/${ticker}`
+            `https://wetrade-stock-project.herokuapp.com/api/stock/getStockInfo/${ticker}`
           )
           .then((response) => {
             setStockData(response.data);
@@ -40,7 +40,7 @@ function Trade() {
   const getStockNews = () => {
     axios
       .get(
-        `http://wetrade-stock-project.herokuapp.com/api/stock/getStockNews/${ticker}`
+        `https://wetrade-stock-project.herokuapp.com/api/stock/getStockNews/${ticker}`
       )
       .then((response) => {
         setStockNews(response.data.slice(0, 10));
@@ -49,7 +49,7 @@ function Trade() {
 
   const getAllTickers = () => {
     axios
-      .get("http://wetrade-stock-project.herokuapp.com/api/stock/getAllStocks")
+      .get("https://wetrade-stock-project.herokuapp.com/api/stock/getAllStocks")
       .then((response) => {
         setSearchBarData(response.data);
       });
@@ -58,7 +58,7 @@ function Trade() {
   const getStockTransactionData = () => {
     axios
       .get(
-        `http://wetrade-stock-project.herokuapp.com/api/stock/updateStockPrice/${ticker}`
+        `https://wetrade-stock-project.herokuapp.com/api/stock/updateStockPrice/${ticker}`
       )
       .then((response) => {
         setTransactionShareData(response.data);
@@ -69,7 +69,7 @@ function Trade() {
     const userId = authState.id;
     axios
       .get(
-        `http://wetrade-stock-project.herokuapp.com/funds/getUserInformation/${userId}`
+        `https://wetrade-stock-project.herokuapp.com/funds/getUserInformation/${userId}`
       )
       .then((response) => {
         setTransactionUserData(response.data);
@@ -83,7 +83,7 @@ function Trade() {
     };
     axios
       .post(
-        "http://wetrade-stock-project.herokuapp.com/funds/getAmountOfStockUserOwns",
+        "https://wetrade-stock-project.herokuapp.com/funds/getAmountOfStockUserOwns",
         data
       )
       .then((response) => {
