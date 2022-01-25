@@ -162,7 +162,7 @@ function Trade() {
             alt="Company Logo"
           ></Image>
           <h1 className="stockHeaderName">{stockData.companyName}</h1>
-          <h1 className="stockHeaderTicker">{stockData.ticker}</h1>
+          {/* <h1 className="stockHeaderTicker">{stockData.ticker}</h1> */}
         </div>
         <div className="stockInfo">
           <h6>{stockData.exchange}</h6>
