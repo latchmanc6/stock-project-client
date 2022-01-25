@@ -9,13 +9,18 @@ import Trade from "./pages/Trade";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Portfolio from "./pages/Portfolio";
+import Profile from "./pages/Profile";
+import FundingHistory from "./pages/FundingHistory";
 
 import TopNavbar from "./components/TopNavbar";
 import { ModalContext } from "./helpers/ModalContext";
 
+
 function App() {
+
   // AuthContext Values
   const [authState, setAuthState] = useState({
+    firstName: "",
     email: "",
     id: 0,
     status: false,
@@ -63,11 +68,13 @@ function App() {
             <TopNavbar logout={logout} />
 
             <Routes>
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/trade/:ticker" element={<Trade />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/my-portfolio" element={<Portfolio />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/transaction-history" element={<FundingHistory />} />
             </Routes>
           </Router>
         </ModalContext.Provider>

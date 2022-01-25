@@ -1,13 +1,13 @@
 /* Google font - Ubuntu */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
 
 .App:not(.newsCard):not(.newsSquare):not(.newsImg) {
   /* text-align: center; */
@@ -25,7 +25,46 @@ body {
 }
 
 a {
-  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+a:hover {
+  color: rgb(64, 62, 61);
+  background-color: transparent;
+}
+
+.error {
+  border: 2px solid #ff6565;
+}
+
+.error-message {
+  color: #ff6565;
+  /* padding: .5em .2em; */
+  /* height: 1em; */
+  /* position: absolute; */
+  font-size: 0.8em;
+}
+
+.nav-link {
+  color: rgb(115, 112, 110);
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: rgb(64, 62, 61);
+}
+
+.uppercase {
+  text-transform: uppercase; 
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.modalCost {
+  margin-top: 10px;
 }
 
 /* ------------------------------------------ Trade Page START ------------------------------------------ */
@@ -38,9 +77,22 @@ a {
   margin: 0 auto;
 }
 
+.companyWrapper {
+  margin-top: 30px;
+}
+
+.stockInfo {
+  width: 300px;
+  display: flex;
+  margin: 10px auto;
+  justify-content: space-between;
+
+}
+
 .stockLogo {
-  height: 100px;
-  width: 100px;
+  height: auto;
+  width: 60px;
+  margin-right: 20px;
 }
 
 .stockHeaderName {
@@ -74,17 +126,18 @@ a {
 }
 
 .newsImg {
-  clip: rect(0px, 460px, 220px, 0px);
+  /* clip: rect(0px, 460px, 220px, 0px); */
+  height: 220px;
   border-radius: 4px;
-  position: absolute;
-  max-width:100%;
-  height: auto;
+  /* position: absolute; */
+  max-width: 100%;
+  /* height: auto; */
 }
 
 .newsHeadline {
   margin: auto;
   text-align: left;
-  margin-top: 240px;
+  margin-top: 20px;
   padding-left: 30px;
   font-size: 24px;
 }
@@ -116,11 +169,11 @@ a {
 
 /* ------------------------------------------ Search Bar START ------------------------------------------ */
 
-.searchInputs {
+/* .searchInputs {
   display: flex;
-}
+} */
 
-.search input {
+/* .search input {
   background-color: white;
   border: 0;
   border-radius: 2px;
@@ -130,7 +183,17 @@ a {
   padding: 15px;
   height: 30px;
   width: 300px;
+} */
+
+.searchInput {
+  border-radius: 15px;
+  font-size: 18px;
+  padding: 15px;
+  margin-top: 8px;
+  height: 50px;
+  width: 300px;
 }
+
 
 .searchIcon {
   height: 60px;
@@ -144,10 +207,24 @@ input:focus {
   outline: none;
 }
 .searchIcon svg {
+  margin-top: 7px;
   font-size: 35px;
 }
 
 .dataResult {
+  display: static;
+  position: absolute;
+  width: 300px;
+  right: 19%;
+  top: 50px;
+  overflow: hidden;
+  max-height: 200px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* .dataResult {
   margin-top: 5px;
   width: 300px;
   height: 200px;
@@ -155,7 +232,7 @@ input:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
-}
+} */
 
 .dataResult::-webkit-scrollbar {
   display: none;
@@ -172,12 +249,9 @@ input:focus {
 .dataItem p {
   margin-left: 10px;
 }
+
 a {
   text-decoration: none;
-}
-
-a:hover {
-  background-color: lightgrey;
 }
 
 #clearBtn {

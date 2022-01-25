@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -10,14 +10,30 @@ import { stripePromise } from "../helpers/stripePromise";
 import { AuthContext } from "../helpers/AuthContext";
 import { ModalContext } from "../helpers/ModalContext";
 import FundModal from "./FundModal";
+import { StyliedNavbar } from "components/Styled/style.js";
+import SearchBar from "./SearchBar";
+import axios from "axios";
 
 const TopNavbar = ({ logout }) => {
   const { authState } = useContext(AuthContext);
   const { modal } = useContext(ModalContext);
   const [showModal, setModalShow] = modal;
+  const [searchBarData, setSearchBarData] = useState({});
+
+  const getAllTickers = () => {
+    axios
+      .get("https://wetrade-stock-project.herokuapp.com/api/stock/getAllStocks")
+      .then((response) => {
+        setSearchBarData(response.data);
+      });
+  };
+
+  useEffect(() => {
+    getAllTickers();
+  }, []);
 
   return (
-    <Navbar bg="light" expand="lg" variant="light">
+    <StyliedNavbar bg="light" expand="lg" variant="light">
       <Container>
         <Navbar.Brand href="/">WeTrade</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,20 +57,26 @@ const TopNavbar = ({ logout }) => {
 
                   <NavDropdown.Item href="#">Withdraw funds</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#">View transaction history</NavDropdown.Item>
+                  <NavDropdown.Item href="/transaction-history">
+                    View transaction history
+                  </NavDropdown.Item>
                 </NavDropdown>
               </>
             )}
 
             {authState.status ? (
               <>
-                <NavDropdown title="User" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                {/* <NavDropdown title="User" id="basic-nav-dropdown"> */}
+                <NavDropdown
+                  title={authState.firstName ? authState.firstName : "User"}
+                  id="basic-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="#"></NavDropdown.Item>
-                  <NavDropdown.Item href="#">Something</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout}>Sign Out</NavDropdown.Item>
                 </NavDropdown>
+                  
               </>
             ) : (
               <>
@@ -63,9 +85,16 @@ const TopNavbar = ({ logout }) => {
               </>
             )}
           </Nav>
+
+          {authState.status && (
+            <SearchBar
+              placeholder="Enter a ticker..."
+              data={searchBarData}
+            />
+          )}
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </StyliedNavbar>
   );
 };
 

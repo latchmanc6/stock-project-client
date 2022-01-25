@@ -17,8 +17,8 @@ const ButtonBase = styled.button`
   ${(props) => StyledButton[props.size]};
 `;
 
-export const Button = ({ variant, ...rest }) => (
-  <ButtonBase variant={variant} {...rest} />
+export const Button = ({ variant, size, ...rest }) => (
+  <ButtonBase variant={variant} size={size} {...rest} />
 );
 
 /**
@@ -30,8 +30,8 @@ const BoxBase = styled.div`
   ${(props) => StyledBox[props.size]};
 `;
 
-export const BoxRound = ({ variant, ...rest }) => (
-  <BoxRound variant={variant} {...rest} />
+export const BoxRound = ({ size, ...rest }) => (
+  <BoxBase size={size} {...rest} />
 );
   
 /**
@@ -64,3 +64,17 @@ export const TableRound = styled.table.attrs({
   box-shadow: rgb(59 59 59 / 5%) 0px 5px 15px 0px;
   width: 100%;
 `;
+
+/**
+ * override Bootstrap <Navbar> component design
+ *
+ * import { StyliedNavbar } from 'components/Styled/style.js';
+ */
+
+export const StyliedNavbar = styled.nav.attrs({
+  className: "navbar navbar-expand-lg"
+})`
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgb(59 59 59 / 5%) 0px 5px 15px 0px;
+  height: 75px;
+`

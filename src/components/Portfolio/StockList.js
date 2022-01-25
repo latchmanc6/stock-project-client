@@ -5,9 +5,37 @@ import axios from "axios";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 
 import Table from "react-bootstrap/Table";
-import { TableRound } from 'components/Styled/style.js';
+import styled from "styled-components";
+
+const ReturnWrapper = styled.div`
+  display: flex;
+`;
+
+const StyledTable = styled.table`
+  border-radius: 10px;
+  background-color: rgb(255,255,255);
+  box-shadow: rgb(59 59 59 / 5%) 0px 5px 15px 0px;
+  width: 100%;
+
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 15px;
+  }
+
+  tr {
+    border-bottom: 1px solid rgb(230, 228, 227);
+  }
+
+  .point {
+    cursor: pointer;
+  }
+
+`;
 
 const StockList = () => {
+  let navigate = useNavigate(); 
+
   const [stockList, setstockList] = useState([]);
   const tableHead = [
     "Ticker",
@@ -32,10 +60,15 @@ const StockList = () => {
       });
   }, []);
 
+  const routeStockPage = (ticker) =>{ 
+    console.log('click')
+    navigate(`/trade/${ticker}`);
+  }
+
   return (
     <div>
       <h5 className="text-left text-muted">Your portfolio</h5>
-      <TableRound striped bordered hover>
+      <StyledTable>
         <thead>
           <tr>
             {tableHead.map((head, key) => {
@@ -47,43 +80,44 @@ const StockList = () => {
         <tbody>
           {stockList.map((value, key) => {
             return (
-              <tr key={key}>
+              <tr key={key} className="point" onClick={() => routeStockPage(value.ticker)}>
                 <td>
-                  <p>{value.ticker}</p>
+                  <h5>{value.ticker}</h5>
                   <span className="text-muted">{value.Stocks.companyName}</span>
                   <br />
                   <span className="text-muted">{value.Stocks.exchange}</span>
                 </td>
                 <td>
-                  <p>${value.Stocks.currentPrice}</p>
+                  <h5>${value.Stocks.currentPrice}</h5>
                   <span className="text-muted">USD</span>
                 </td>
                 <td>
-                  <p>${value.Stocks.currentPrice * value.totalCounts}</p>
+                  <h5>${value.Stocks.currentPrice * value.totalCounts}</h5>
                   <span className="text-muted">{value.totalCounts} shares</span>
                 </td>
                 <td>
-                  
-                  {value.Stocks.currentPrice - value.buyAvg > 0 ? (
-                    <TiArrowSortedUp style={{color: "#377674", fontSize: 18}} />
-                  ) : (
-                    <TiArrowSortedDown style={{color: "#b90e0a", fontSize: 18}} />
-                  )}
-                  <p>{formatter.format(value.Stocks.currentPrice - value.buyAvg)}</p>
-                  {/* FIXME: move the calculation to sever side */}
-                  <span className="text-muted">
-                    {(
-                      (value.Stocks.currentPrice / value.buyAvg - 1) *
-                      100
-                    ).toFixed(2)}
-                    %
-                  </span>
+                  <ReturnWrapper>
+                    {value.Stocks.currentPrice - value.buyAvg > 0 ? (
+                      <TiArrowSortedUp style={{color: "#377674", fontSize: 18}} />
+                    ) : (
+                      <TiArrowSortedDown style={{color: "#b90e0a", fontSize: 18}} />
+                    )}
+                    <h5>{formatter.format(value.Stocks.currentPrice - value.buyAvg)}</h5>
+                    {/* FIXME: move the calculation to sever side */}
+                  </ReturnWrapper>
+                    <span className="text-muted">
+                      {(
+                        (value.Stocks.currentPrice / value.buyAvg - 1) *
+                        100
+                      ).toFixed(2)}
+                      %
+                    </span>
                 </td>
               </tr>
             );
           })}
         </tbody>
-      </TableRound>
+      </StyledTable>
     </div>
   );
 };
