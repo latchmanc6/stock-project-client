@@ -259,3 +259,9 @@ a {
 }
 
 /* ------------------------------------------ Search Bar END ------------------------------------------ */
+
+.loginInformationSection {
+  height: 45px;
+  text-align: center;
+  padding: 10px;
+}

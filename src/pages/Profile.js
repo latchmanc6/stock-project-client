@@ -101,7 +101,6 @@ const Profile = () => {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
-          console.log(response.data);
           setUserInfo(response.data);
         });
     }
@@ -123,9 +122,7 @@ const Profile = () => {
         )
         .then((response) => {
           if (response.data.error) {
-            console.log(response.data.error);
           } else {
-            console.log(response.data);
             setUserInfo({ ...userInfo, phone: newPhone });
             setShowForm({ ...showForm, phone: false });
           }
@@ -146,9 +143,7 @@ const Profile = () => {
         )
         .then((response) => {
           if (response.data.error) {
-            console.log(response.data.error);
           } else {
-            console.log(response.data);
             setUserInfo({
               ...userInfo,
               address: newAddress.address,
@@ -173,9 +168,7 @@ const Profile = () => {
         )
         .then((response) => {
           if (response.data.error) {
-            console.log(response.data.error);
           } else {
-            console.log(response.data.message);
             setShowForm({ ...showForm, password: false });
           }
         });
