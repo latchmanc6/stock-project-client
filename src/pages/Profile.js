@@ -356,16 +356,20 @@ const Profile = () => {
               {!showForm.password ? (
                 <>
                   <Col xs={6} md={2}>
-                    <Button
-                      className="passBtn"
-                      variant="primary"
-                      size="sm"
-                      onClick={() =>
-                        setShowForm({ ...showForm, password: true })
-                      }
-                    >
-                      Edit
-                    </Button>
+                    {userInfo.email === "chris@chris.com" ? (
+                      <p>Cannot Edit Password on Test Account</p>
+                    ) : (
+                      <Button
+                        className="passBtn"
+                        variant="primary"
+                        size="sm"
+                        onClick={() =>
+                          setShowForm({ ...showForm, password: true })
+                        }
+                      >
+                        Edit
+                      </Button>
+                    )}
                   </Col>
                 </>
               ) : (
